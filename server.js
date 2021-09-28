@@ -11,6 +11,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+db.sequelize.sync();
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to our apis" });
 });
