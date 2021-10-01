@@ -7,8 +7,18 @@ const log = config.log();
 const app = require('../app')(config);
 
 async function connectToProsgres() {
-  const sequelize = new Sequelize(config.postgres.options)
+    const sequelize = new Sequelize(config.postgres.options)
+    try {
+        await sequelize.authenticate();
+        log.info('Connection has been established successfully.');
+        return sequelize;
+    } catch(err) {
+    log.error('Unable to connect to the database:', err);
+  }
 }
+
+const postgresClient = connectToProsgres();
+config.postgres.client = postgresClient;
 
 const server = http.createServer(app);
 
