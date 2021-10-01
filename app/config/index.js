@@ -1,3 +1,4 @@
+const Logger = require('bunyan');
 const bunyan = require('bunyan');
 // Load package.json
 const pjs = require('../package.json');
@@ -14,6 +15,18 @@ module.exports = {
     name,
     version,
     serviceTimeout: 30,
+    postgres: {
+      options: {
+      host: 'localhost',
+      port: 5432,
+      database: 'bac',
+      dialect: 'postgres',
+      username: 'postgres',
+      password: 'BLESSINGS',
+      logging: msg => getLogger(name, version, 'debug').info(msg),
+      },
+      client: null
+    },
     log: () => getLogger(name, version, 'debug'),
   },
   production: {
