@@ -1,10 +1,10 @@
 const express = require('express');
 
 const app = express();
-const routes = require('./app/routes/users');
+const routes = require('./routes/users');
 
-const TodoService = require('./app/services/TodoServices');
-const UserService = require('./app/services/UserService');
+const TodoService = require('./services/TodoServices');
+const UserService = require('./services/UserService');
 
 module.exports = (config) => {
   const log = config.log();
